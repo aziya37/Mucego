@@ -109,6 +109,15 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9dd3d41-00e9-4f2d-87ac-d05c1d1335e2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -177,6 +186,17 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f7c8a39-bb51-4d0b-8cc4-58074c21270a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +207,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         m_Geral = asset.FindActionMap("Geral", throwIfNotFound: true);
         m_Geral_Move = m_Geral.FindAction("Move", throwIfNotFound: true);
         m_Geral_Jump = m_Geral.FindAction("Jump", throwIfNotFound: true);
+        m_Geral_Interact = m_Geral.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@PlayerInputController()
@@ -269,6 +290,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private List<IGeralActions> m_GeralActionsCallbackInterfaces = new List<IGeralActions>();
     private readonly InputAction m_Geral_Move;
     private readonly InputAction m_Geral_Jump;
+    private readonly InputAction m_Geral_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "Geral".
     /// </summary>
@@ -288,6 +310,10 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// Provides access to the underlying input action "Geral/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Geral_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Geral/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Geral_Interact;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -320,6 +346,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         /// <summary>
@@ -337,6 +366,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         /// <summary>
@@ -391,5 +423,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
