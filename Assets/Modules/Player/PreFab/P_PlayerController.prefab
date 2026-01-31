@@ -109,8 +109,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2064232567
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -750989773, guid: 5563e89c2c405e4469b67925c3600419, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -214,14 +214,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: 3574979436273353470}
   inputManager: {fileID: 9114128188585947087}
-  maxSpeed: 8
-  power: 0.93
-  acc: 10
-  dcc: 20
-  jumpForce: 14
-  coyoteTime: 0.2
+  currentProfile: {fileID: 11400000, guid: a4bab713845ea674dadfc3f6084275b9, type: 2}
   footPivot: {fileID: 5048685772972600306}
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  grounded: 1

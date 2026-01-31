@@ -17,7 +17,7 @@ public class DoorManager : MonoBehaviour
     }
     void Start()
     {
-        inputManager.OnInteract  += GoToNextLevel;
+        inputManager.OnInteract += GoToNextLevel;
     }
 
     void GoToNextLevel()
