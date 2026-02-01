@@ -13,11 +13,17 @@ public class PlayerController : MonoBehaviour
     [Header("GROUND SETTINGS")]
     public Transform footPivot;
     private float coyoteTimeCounter;
+    private float startScale;
+    private float defaultGravity;
+    private bool fallController;
 
     private void Awake() 
     {
         if(Instance == null)
             Instance = this;
+            
+        startScale = transform.localScale.x;
+        defaultGravity = playerRb.gravityScale;
     }
     private void Move(float input)
     {
@@ -29,6 +35,24 @@ public class PlayerController : MonoBehaviour
         float rate = Mathf.Abs(target) > .001f ? currentProfile.acc : currentProfile.dcc;
         playerRb.AddForce(Vector2.right * rate * diff, ForceMode2D.Force);
 
+    }
+
+    private void Fall()
+    {
+        bool grounded = OnGround();
+
+        if(grounded)
+        {
+            fallController = false;
+            playerRb.gravityScale = defaultGravity;
+            return;
+        }
+
+        if(!fallController && playerRb.linearVelocityY < 0f)
+        {
+            fallController = true;
+            playerRb.gravityScale = defaultGravity * currentProfile.gravityMultplier;
+        }
     }
     
     private void Jump()
@@ -46,7 +70,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        transform.localScale = inputManager.moveInput.x > 0?  Vector3.one : inputManager.moveInput.x < 0? new Vector3(-1,1,1) : transform.localScale;
+        transform.localScale = inputManager.moveInput.x > 0?  Vector3.one * startScale : inputManager.moveInput.x < 0? new Vector3(-startScale,startScale,startScale) : transform.localScale;
 
         if(OnGround())
             coyoteTimeCounter = currentProfile.coyoteTime;
@@ -57,6 +81,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move(inputManager.moveInput.x);
+        Fall();
     }
     // funcao que verifica se estamos no chao
     private bool OnGround()

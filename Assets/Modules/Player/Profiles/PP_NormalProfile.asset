@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4b6afca69281849a832d1562749216, type: 3}
   m_Name: PP_NormalProfile
   m_EditorClassIdentifier: 
-  maxSpeed: 8
+  maxSpeed: 11
   power: 0.93
-  acc: 10
+  acc: 13
   dcc: 18
-  jumpForce: 16
+  jumpForce: 18
   coyoteTime: 0.2
+  gravityMultplier: 2
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -14,6 +14,7 @@ public class PlayerProfile : ScriptableObject
     [Header("JUMP SETTINGS")]
     public float jumpForce;
     public float coyoteTime = .13f;
+    public float gravityMultplier = 1.5f;
     private float coyoteTimeCounter;
     public LayerMask GroundLayer;
 }
